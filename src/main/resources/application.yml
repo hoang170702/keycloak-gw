@@ -1,0 +1,21 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: keycloak-gw
+  threads:
+    virtual:
+      enabled: true
+
+keycloak:
+  base-url: http://localhost:8080
+  admin:
+    admin-realm: master
+    admin-client-id: admin-cli
+    admin-token: "/realms/%s/protocol/openid-connect/token"
+  ecom:
+    ecom-realm: ecom
+    ecom-client-id: ecom-client
+    ecom-client-secret: YN3Glh4Fw8zwcFhzoLF14ikEYSwpedLv
+

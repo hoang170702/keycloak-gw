@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty scope="context" name="SERVICE_NAME" source="spring.application.name" defaultValue="keycloak-gw"/>
+
+    <property name="basePath" value="logs/${SERVICE_NAME}"/>
+    <property name="fileName" value="${SERVICE_NAME}"/>
+
+    <property name="STDOUT_LOG_PATTERN"
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-20.20logger{36}] [%-20.20t] [TraceId:%-15.15X{traceId}] [SpanId:%-12.12X{spanId}] [X-Request-Id:%-36.36X{requestId}] [userId:%-12.12X{userId}] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <property name="FILE_LOG_PATTERN"
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-20.20logger{36}] [%-20.20t] [TraceId:%-15.15X{traceId}] [SpanId:%-12.12X{spanId}] [X-Request-Id:%-36.36X{requestId}] [userId:%-12.12X{userId}] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <!-- Console Appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ecom.log.pattern.MaskingPatternLayout">
+                <maskPattern>password</maskPattern>
+                <maskPattern>credential</maskPattern>
+                <maskPattern>cardNumber</maskPattern>
+                <maskPattern>otp</maskPattern>
+                <Pattern>${STDOUT_LOG_PATTERN}</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <!-- FILE-AUDIT: All logs -->
+    <appender name="FILE-AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${basePath}/${fileName}.log</file>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ecom.log.pattern.MaskingPatternLayout">
+                <maskPattern>password</maskPattern>
+                <maskPattern>credential</maskPattern>
+                <maskPattern>cardNumber</maskPattern>
+                <maskPattern>otp</maskPattern>
+                <Pattern>${FILE_LOG_PATTERN}</Pattern>
+            </layout>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${basePath}/archived/${fileName}/%d{yyyy/MM/dd}/${fileName}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <!-- FILE-DEBUG: DEBUG level logs only -->
+    <appender name="FILE-DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${basePath}/${fileName}-debug.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ecom.log.pattern.MaskingPatternLayout">
+                <maskPattern>password</maskPattern>
+                <maskPattern>credential</maskPattern>
+                <maskPattern>cardNumber</maskPattern>
+                <maskPattern>otp</maskPattern>
+                <Pattern>${FILE_LOG_PATTERN}</Pattern>
+            </layout>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${basePath}/archived/${fileName}/%d{yyyy/MM/dd}/${fileName}-debug.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <!-- FILE-INFO: INFO, WARN, ERROR level logs -->
+    <appender name="FILE-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${basePath}/${fileName}-info.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ecom.log.pattern.MaskingPatternLayout">
+                <maskPattern>password</maskPattern>
+                <maskPattern>credential</maskPattern>
+                <maskPattern>cardNumber</maskPattern>
+                <maskPattern>otp</maskPattern>
+                <Pattern>${FILE_LOG_PATTERN}</Pattern>
+            </layout>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${basePath}/archived/${fileName}/%d{yyyy/MM/dd}/${fileName}-info.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Root logger -->
+    <root level="debug">
+        <appender-ref ref="FILE-DEBUG"/>
+        <appender-ref ref="FILE-INFO"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <!-- Custom utils logger -->
+    <logger name="utils" level="debug" additivity="false">
+        <appender-ref ref="FILE-AUDIT"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+</configuration>

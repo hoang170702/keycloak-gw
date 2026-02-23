@@ -1,0 +1,568 @@
+{
+  "info": {
+    "_postman_id": "81d044e2-574c-423a-a162-551a79703e49",
+    "name": "keycloak-gw",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32170313"
+  },
+  "item": [
+    {
+      "name": "api-keycloak",
+      "item": [
+        {
+          "name": "user",
+          "item": [
+            {
+              "name": "create-user",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQSGtocllJenZUVVh5RGhqNlNfTmpNWFZxOHpEOFg3Z21zeUtCSHFlMEhJIn0.eyJleHAiOjE3NzAyNjMzMjQsImlhdCI6MTc3MDI2MzI2NCwianRpIjoiYjIzYmJhOWQtYjZhYS00ZGM2LThmNDEtY2U3Yzg0NTZiYWVhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJiMGMxOTc2ZS00MDRjLTRhMzktOWNkZi05ZjBlZTRhZGY1YjciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiNjJiYTViNGMtN2JmNy00YTM1LTliMzctYjU1YTk1YTNiODAxIiwiYWNyIjoiMSIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6IjYyYmE1YjRjLTdiZjctNGEzNS05YjM3LWI1NWE5NWEzYjgwMSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.U8qRrN34quzMWO_ZB6Dj5rfV4ssGRYgTnhhpsLgMQ16u8AxJQXJiGU1EvISr3DJiYSEZ3grgDy-KHSulI3FIcHJB5BEDTYk1P-KhePXE7ScDmKU0w7epqAJw8EhlJfmE5-eItSei19yAgEWiurNx4jk7OMMq-uCjMWyKCaKiLpAHarbY46BUXIieDNCpVauBJ_OaVFPoxKyve6NmKX5KHoHU3l721_ZoJie-X4MS-uovSw9ErmDpGkk5_LMBTl9frSTvC3PCp8K4lwvEQN9ugHHII7GKo6KkW2OfwrX7PgS9o7shjcMyZPXJ4AsTCHmpjj8_Ev3IF4IwMjl80ItkVQ",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"username\": \"huy1\",\n    \"enabled\": true,\n    \"email\": \"huy@gmail.com\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"emailVerified\": true,\n    \"requiredActions\": [],\n    \"credentials\": [\n        {\n            \"type\": \"password\",\n            \"value\": \"Abc@1234\",\n            \"temporary\": false\n        }\n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/admin/realms/ecom/users",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "realms",
+                    "ecom",
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get-userId",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQSGtocllJenZUVVh5RGhqNlNfTmpNWFZxOHpEOFg3Z21zeUtCSHFlMEhJIn0.eyJleHAiOjE3NzAyODEzOTksImlhdCI6MTc3MDI4MTMzOSwianRpIjoiZmI2NjI3YTgtNTkyOC00YjE2LTkyNjQtZTc0MzE0NDdiZTQyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJiMGMxOTc2ZS00MDRjLTRhMzktOWNkZi05ZjBlZTRhZGY1YjciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiZDk4M2U0MDMtMzM0MC00ZTIxLWI0MTktOTZjNWU5MTEwY2RkIiwiYWNyIjoiMSIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImQ5ODNlNDAzLTMzNDAtNGUyMS1iNDE5LTk2YzVlOTExMGNkZCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.DqO7C-y8Os0N1Zy0R6t9EhANvYAU6ANA_nFVUuPDiQ-uEBVnPI38DbZFyXEF2uxlLsCTBSrWTafZXgIkw6iJgbASotRF6uiEyNSnOWmQxAYv22u6deb8a87CaxLarBa2VySvkZVhyki9JpfNx-lUDhINto8Jr0A0YQY2z__k_lNc7IiHU5zEFfLyUX5Vpq4sonOVYQqL-Rm7cOY-6_aucFKs3bwQH8OpxRACLVqvDybqP3eEkqLPpG4tDpEgjB2qsqTOWkuu654VPr2dg48ReKUUV9y3wH7afdcCaDtd1xIDJ1nWpXR9dWlJ5HaH-gcUU5M56sNdyoMKqMkZQVtWOQ",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/admin/realms/ecom/users?username=huy",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "realms",
+                    "ecom",
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "huy"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get-realm-role",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQSGtocllJenZUVVh5RGhqNlNfTmpNWFZxOHpEOFg3Z21zeUtCSHFlMEhJIn0.eyJleHAiOjE3NzAyNzkwNzUsImlhdCI6MTc3MDI3OTAxNSwianRpIjoiMGY5NTgzOTMtNWYzZS00NDM3LWJhZWUtYmIxMDQ2Yzc0YTQzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJiMGMxOTc2ZS00MDRjLTRhMzktOWNkZi05ZjBlZTRhZGY1YjciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiZjIyZTRhZTEtYzg0OC00ZWJjLWEwNWUtY2QwY2VkZjhiNjdkIiwiYWNyIjoiMSIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImYyMmU0YWUxLWM4NDgtNGViYy1hMDVlLWNkMGNlZGY4YjY3ZCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.WG1sL5PPIyt45pw6SP3xxdwgwnusaiuHQuztjLFdc80xS0LrlCHrKEhysIA3VV4V1Yn2m6qONhyp0p3CdDyNPyH9OwOCy3Dp9X3LwYxibz3UjSuslU2V5iaV1Iu50zHOXyJ387wi6Ui5RSkR8CHVEHbak7nliehBVOpPNxF0ut-JY9vz8qRQo7kZTUJFdmSD1iX-bO4MLJFUCK8pE-RpA3EmwGQk6hD63Qlk5iq-S_VvGtnuxP3dfL4vAal_bCQo5Egeqz_Y0nBp5WJtJQHkJvTjq_LamNMob2TyyDwyF0sQO3JyzJxHRPj4ueLjxsNeqMXFf6PXh-26h_ftGwxC5A",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/admin/realms/ecom/roles/CUSTOMER",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "realms",
+                    "ecom",
+                    "roles",
+                    "CUSTOMER"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "assign role",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQSGtocllJenZUVVh5RGhqNlNfTmpNWFZxOHpEOFg3Z21zeUtCSHFlMEhJIn0.eyJleHAiOjE3NzAyNzkxNDAsImlhdCI6MTc3MDI3OTA4MCwianRpIjoiZGQ4MDA0MjEtZDczZi00Yzg3LWJkMjMtMTllZDcwMWFlYmEzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJiMGMxOTc2ZS00MDRjLTRhMzktOWNkZi05ZjBlZTRhZGY1YjciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiZmY4Mjk4MWUtNGFjNC00MzU1LWJkZWMtZmQ4NDk2M2JjODkyIiwiYWNyIjoiMSIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImZmODI5ODFlLTRhYzQtNDM1NS1iZGVjLWZkODQ5NjNiYzg5MiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.WOyfpT91nJZbKn0Uzv-ZsF3qd8qmscPPvOOXnFu-upA34dYDi0MTDP4pc4xOcFcJGMovFmBK-RX0b-KPWSDjJ1FDt0qDo9cvtWC48pLyIQ8NlnyuVr85xDW51yey-QHrlR70v_-iECxRHHiV3QGBc1GYiBFEzkDWIAtlMkhmefL0sUQqh3QkKC2ji6MIpICajgW9U9v-xLAZxTlx6wdyGzlUH7bLuNjJaxU_Vr2grD8psuX6pdhTzWFtipwol5Q0n_KRMwQhuC9NuAu0pd8CMPqTjdg1U1TaCe8RpQE-W4WC8JBKXuYK5_5difTBemI139x54QevgAfImC7h3dcRWA",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n    {\n      \"id\": \"e8eb5399-45ea-4348-bce9-bdead276f905\",\n      \"name\": \"CUSTOMER\"\n    }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/admin/realms/ecom/users/1f2284e7-2ec8-4944-b22d-aacc4b5a91a4/role-mappings/realm",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "realms",
+                    "ecom",
+                    "users",
+                    "1f2284e7-2ec8-4944-b22d-aacc4b5a91a4",
+                    "role-mappings",
+                    "realm"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "user-login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "type": "text",
+                      "key": "grant_type",
+                      "value": "password"
+                    },
+                    {
+                      "type": "text",
+                      "key": "client_id",
+                      "value": "ecom-client"
+                    },
+                    {
+                      "type": "text",
+                      "key": "client_secret",
+                      "value": "YN3Glh4Fw8zwcFhzoLF14ikEYSwpedLv"
+                    },
+                    {
+                      "type": "text",
+                      "key": "username",
+                      "value": "huy"
+                    },
+                    {
+                      "type": "text",
+                      "key": "password",
+                      "value": "123"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:8080/realms/ecom/protocol/openid-connect/token",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "realms",
+                    "ecom",
+                    "protocol",
+                    "openid-connect",
+                    "token"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "validate-user-token",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "type": "text",
+                      "key": "client_id",
+                      "value": "ecom-client"
+                    },
+                    {
+                      "type": "text",
+                      "key": "client_secret",
+                      "value": "YN3Glh4Fw8zwcFhzoLF14ikEYSwpedLv"
+                    },
+                    {
+                      "type": "text",
+                      "key": "token",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzYnJhMzBYaVg2bWMwNXVKYVVlR1NWUHI1OHNRa0hPZ2pEQUNkRXFhS0FZIn0.eyJleHAiOjE3NzAyODIxMDcsImlhdCI6MTc3MDI4MTgwNywianRpIjoiM2ZlODk5OWYtZDE4YS00MzE1LWIzNGUtMmU4MmZjNGUyODc4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9lY29tIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImQ0YWRmODQ3LTA0NDEtNDYxOS1iY2U1LWRmZTI0MzY3OTdjNCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImVjb20tY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImNhMDBkODEwLWQxZjItNDY3Yy04NmRlLTgwODE5MjI4MzMxOSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiQ1VTVE9NRVIiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtZWNvbSJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImNhMDBkODEwLWQxZjItNDY3Yy04NmRlLTgwODE5MjI4MzMxOSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiTmd1eeG7hW4gSG_DoG5nIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiaHV5IiwiZ2l2ZW5fbmFtZSI6Ik5ndXnhu4VuIiwiZmFtaWx5X25hbWUiOiJIb8OgbmciLCJlbWFpbCI6Imh1eUBnbWFpbC5jb20ifQ.CBeSjdj2n9eRReG3Q3k0Favn3eBM7Eg9mfVv08jUocpjTkoKdZOjXAPFItuI9ed_GPhtRbxIa3PIUiLbPS9yCcoqRoAddOOBcRCeNUMtl5GK8_M7MHX8eJ6KWvVAUHWVqckLavNMukEtRZ-wMiZ1tRw1Rk681k4GCY4ImrrTu3H4WsauwCgd032kffOoCwRZeNt9aFh4z1C1tfovp8IKSoRPa2RxSpkeatfoVjufgHQ_dn4FWzOaXfHsxiCs3NNS3YBOQiZ0AWrDput-igv7SFDZEbqmgJkgzcPIrlYujwXfl39HcqjzoQLzYDcvNcMyrRAZXPFy6oWcnP_zcGnKZQ"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:8080/realms/ecom/protocol/openid-connect/token/introspect",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "realms",
+                    "ecom",
+                    "protocol",
+                    "openid-connect",
+                    "token",
+                    "introspect"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "user-logout",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "type": "text",
+                      "key": "client_id",
+                      "value": "ecom-client"
+                    },
+                    {
+                      "type": "text",
+                      "key": "refresh_token",
+                      "value": "REFRESH_TOKEN"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:8080/realms/ecom/protocol/openid-connect/logout",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "realms",
+                    "ecom",
+                    "protocol",
+                    "openid-connect",
+                    "logout"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update user",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQSGtocllJenZUVVh5RGhqNlNfTmpNWFZxOHpEOFg3Z21zeUtCSHFlMEhJIn0.eyJleHAiOjE3NzAyNzk2NjcsImlhdCI6MTc3MDI3OTYwNywianRpIjoiYjEyODIzZTAtMDlhNC00YmI4LTgzYWItYTFkMDI1NGViYmQxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJiMGMxOTc2ZS00MDRjLTRhMzktOWNkZi05ZjBlZTRhZGY1YjciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiODljNGQyODktMjc0Ny00ZDczLTkxNzItMGNhYjYwMTkxMzM4IiwiYWNyIjoiMSIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6Ijg5YzRkMjg5LTI3NDctNGQ3My05MTcyLTBjYWI2MDE5MTMzOCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.yVNYIFFJ_ho5xOCCnt4Py7MW6uGRyqeuQzNK_7ar_oufVl3U1hVJ02sXnDnqkt3XlNnT2dqc2KIlviGyRJJoBNqDpxVfVjowheQgRzRbiOGcctplZOg9VpL55PMz0-DLKWce5kmaZX4a7ouij1lFtDddn6EgH1yL4or7Y3ay_7784UBKzRTyiRZhigqOrCUD_zAwbI8OSje1BUQJj-lN51bYQIY32w-xNyX8oF499zYh2cBGYzVX1prKSAccH0zkNPKGMSuOPM6kpQxAPN8XeIYregS_0YDCJpZQik0inFrkrpzZydvH9Mmw-m0a_AAB1h8i6c_YYFoKeJwj_d46Rg",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer YOUR_ADMIN_TOKEN"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"requiredActions\": []\n  }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/admin/realms/ecom/users/1f2284e7-2ec8-4944-b22d-aacc4b5a91a4",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "realms",
+                    "ecom",
+                    "users",
+                    "1f2284e7-2ec8-4944-b22d-aacc4b5a91a4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "check pass user",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQSGtocllJenZUVVh5RGhqNlNfTmpNWFZxOHpEOFg3Z21zeUtCSHFlMEhJIn0.eyJleHAiOjE3NzAyNzk3NjksImlhdCI6MTc3MDI3OTcwOSwianRpIjoiYjZjMGZhMWEtNjhmMS00ZDRjLTg5MjktNThlZTk3NWZjN2FkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJiMGMxOTc2ZS00MDRjLTRhMzktOWNkZi05ZjBlZTRhZGY1YjciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiZDQ2ODZkNGItZGQzNi00NjYxLWFkZDEtMzQ4OWY0ZmQyYThiIiwiYWNyIjoiMSIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImQ0Njg2ZDRiLWRkMzYtNDY2MS1hZGQxLTM0ODlmNGZkMmE4YiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.f0GEt011PgHZdo3dKkjaUyqakoeGA1DiUa-hxrakxCHs-yAhE9sj5PG0U5pJ-GsM9CgZul1C5drhtOu-y2cn6F4so9BFQbyb8u3kTQLdG2Fqc3Ap376UUpLm982JfnRnIV6knSxOkSxUZfTEH2AXgOupcpmTkjlwSm7wTQtHkkHBhh_8PP9tircd7vrgg8RwOx2dxKdH-AyFi_SzUY9AfBqftSoOvbkS6MifGbZfF23WY4Vk4MhXasLduSNNAjBNz4HZZ438_TLG7UCAPKMAvkVeq-yk6cQrwPtJ6jGIx99HwNa4qQXo91mSK1HuGTNg2HXGyXqZswvbLyZb4j8pDQ",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer YOUR_ADMIN_TOKEN"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8080/admin/realms/ecom/users/1f2284e7-2ec8-4944-b22d-aacc4b5a91a4/credentials",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "realms",
+                    "ecom",
+                    "users",
+                    "1f2284e7-2ec8-4944-b22d-aacc4b5a91a4",
+                    "credentials"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "user details",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQSGtocllJenZUVVh5RGhqNlNfTmpNWFZxOHpEOFg3Z21zeUtCSHFlMEhJIn0.eyJleHAiOjE3NzAyNzk4NDksImlhdCI6MTc3MDI3OTc4OSwianRpIjoiNmU2MGI1MmEtNjM3ZC00ZGUzLWJkMGUtNGU3NmRjOWI1NmFmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJiMGMxOTc2ZS00MDRjLTRhMzktOWNkZi05ZjBlZTRhZGY1YjciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiZGM1ZWU5NTAtODcxYy00M2I3LWFjNjYtMDY2ZjkwOTU4M2JiIiwiYWNyIjoiMSIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6ImRjNWVlOTUwLTg3MWMtNDNiNy1hYzY2LTA2NmY5MDk1ODNiYiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.H1GubX8PSZYYboWtWBl5Kl4YudRmdkoQOHlfIxU-RScBMbtlcJ7I8YYw3bPDYmI68bQOINFrkY0I9mQNGS1t3eHUiAM5iSDZKGzeoPstirXaww0nJuyx54KHw7gErHGZWfWZe87qPXcDfVhNC9EbzpfiKyUkKV4QPF1OI9j38Kr6FQXeJrIBpyqVTlgUceLKP-jlR33i8egcIyUMEwAKyijG2iszRPNpykydhqV9RRgQkHOW0fpOJln9FSp3J0i7D_pYeShJZJvChipiFy6tmM6vz4N_m4ovlAXAUkNjGMLM_AJMv2QCXGxxkJwOKxtLxhXuDbsBoQHFKfIo381zcg",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer YOUR_ADMIN_TOKEN"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8080/admin/realms/ecom/users/1f2284e7-2ec8-4944-b22d-aacc4b5a91a4",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "realms",
+                    "ecom",
+                    "users",
+                    "1f2284e7-2ec8-4944-b22d-aacc4b5a91a4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update pass user",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJQSGtocllJenZUVVh5RGhqNlNfTmpNWFZxOHpEOFg3Z21zeUtCSHFlMEhJIn0.eyJleHAiOjE3NzAyODAxNTEsImlhdCI6MTc3MDI4MDA5MSwianRpIjoiMjQ5ZjQwNmMtZjUxNC00MjZiLWI4OWYtNzRkZWJmZTE1ZDZjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJiMGMxOTc2ZS00MDRjLTRhMzktOWNkZi05ZjBlZTRhZGY1YjciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiNjNiNWQ5NzMtODI4NC00YmRhLWI0ZjUtYmQ5MjYzMzc2NDYzIiwiYWNyIjoiMSIsInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsInNpZCI6IjYzYjVkOTczLTgyODQtNGJkYS1iNGY1LWJkOTI2MzM3NjQ2MyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4ifQ.kf9e1VBtJFuR7ZDyObgbWgdLYX038lllq5e7Zgua6r1UuoRSHjjh5ajFpt0M4aPZyfzQWug7bqd55nmSGUFCg2uR-BTccY_e2KUzyjTVc1F9N_NWAO07J3nLfTGurUnWCSGv6C-95YBZQAxaYLJ4owe0yatlVEW5fn74q8jDZfIS9e0uR4nLFH8OjinKyL6-NuNUY7hnMnjlncjNVYPqfmZ2GIkmtk6jzWCs76G_rl6NjI67O2QRkxDHJMgZLWlYJ26KNnfp-8YFAek7psJ-uX_9mRa7UbN5CklrCOgpo-VxHgiDFj-yfKYivjdqpU9M7zK-NUOAwVhU1etlYczEgw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer YOUR_ADMIN_TOKEN"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"type\": \"password\",\n    \"value\": \"Abc@1234\",\n    \"temporary\": false\n  }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/admin/realms/ecom/users/1f2284e7-2ec8-4944-b22d-aacc4b5a91a4/reset-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "admin",
+                    "realms",
+                    "ecom",
+                    "users",
+                    "1f2284e7-2ec8-4944-b22d-aacc4b5a91a4",
+                    "reset-password"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "admin-login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "type": "text",
+                  "key": "grant_type",
+                  "value": "password"
+                },
+                {
+                  "type": "text",
+                  "key": "client_id",
+                  "value": "admin-cli"
+                },
+                {
+                  "type": "text",
+                  "key": "username",
+                  "value": "admin"
+                },
+                {
+                  "type": "text",
+                  "key": "password",
+                  "value": "admin"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/realms/master/protocol/openid-connect/token",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "realms",
+                "master",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "api-gw",
+      "item": []
+    }
+  ]
+}
