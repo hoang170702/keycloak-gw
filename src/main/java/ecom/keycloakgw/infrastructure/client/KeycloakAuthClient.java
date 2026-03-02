@@ -5,7 +5,6 @@ import ecom.keycloakgw.domain.exception.BusinessException;
 import ecom.keycloakgw.domain.exception.ErrorCode;
 import ecom.keycloakgw.infrastructure.config.KeycloakProperties;
 import ecom.log.utils.LoggerUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -18,8 +17,6 @@ public class KeycloakAuthClient {
 
     private final WebClient keycloakWebClient;
     private final KeycloakProperties properties;
-    @Value("${keycloak.admin.admin-token}")
-    private String adminConnectToken;
 
     public KeycloakAuthClient(WebClient keycloakWebClient, KeycloakProperties properties) {
         this.keycloakWebClient = keycloakWebClient;
@@ -27,7 +24,8 @@ public class KeycloakAuthClient {
     }
 
     public Mono<TokenResponse> adminLogin(String username, String password) {
-        String tokenUrl = String.format("/realms/%s/protocol/openid-connect/token", properties.getAdminRealm());
+        String tokenUrl = String.format(properties.getMaster().getUrl().getAdminToken()
+                , properties.getMaster().getAdminRealm());
 
         LoggerUtils.info(KeycloakAuthClient.class, "Calling Keycloak admin login: POST {}", tokenUrl);
 
@@ -35,7 +33,7 @@ public class KeycloakAuthClient {
                 .uri(tokenUrl)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters.fromFormData("grant_type", "password")
-                        .with("client_id", properties.getAdminClientId())
+                        .with("client_id", properties.getMaster().getAdminClientId())
                         .with("username", username)
                         .with("password", password))
                 .retrieve()

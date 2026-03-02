@@ -10,12 +10,25 @@ spring:
 
 keycloak:
   base-url: http://localhost:8080
-  admin:
+  master:
     admin-realm: master
     admin-client-id: admin-cli
-    admin-token: "/realms/%s/protocol/openid-connect/token"
+    url:
+      admin-token: "/realms/%s/protocol/openid-connect/token"
   ecom:
     ecom-realm: ecom
     ecom-client-id: ecom-client
     ecom-client-secret: YN3Glh4Fw8zwcFhzoLF14ikEYSwpedLv
+    url:
+      create-user: "/admin/realms/%s/users"
+      get-user-by-username: "/admin/realms/%s/users"
+      get-user-by-id: "/admin/realms/%s/users/%s"
+      get-realm-role: "/admin/realms/%s/roles/%s"
+      assign-realm-role: "/admin/realms/%s/users/%s/role-mappings/realm"
+      user-login: "/realms/%s/protocol/openid-connect/token"
+      validate-token: "/realms/%s/protocol/openid-connect/token/introspect"
+      logout: "/realms/%s/protocol/openid-connect/logout"
+      update-user: "/admin/realms/%s/users/%s"
+      reset-password: "/admin/realms/%s/users/%s/reset-password"
+
 

@@ -31,11 +31,10 @@ public class KeycloakUserClient {
         this.properties = properties;
     }
 
-    // ======================== CREATE USER ========================
 
     public Mono<Void> createUser(String adminToken, String username, String email,
                                  String firstName, String lastName, String password) {
-        String url = String.format("/admin/realms/%s/users", properties.getEcomRealm());
+        String url = String.format(properties.getEcom().getUrl().getCreateUser(), properties.getEcom().getEcomRealm());
         LoggerUtils.info(KeycloakUserClient.class,
                 "Creating user: POST {} username={}", url, username);
 
@@ -67,10 +66,10 @@ public class KeycloakUserClient {
                         ex -> mapError(ex, "Create user failed"));
     }
 
-    // ======================== GET USER BY USERNAME ========================
 
     public Mono<UserResponse> getUserByUsername(String adminToken, String username) {
-        String url = String.format("/admin/realms/%s/users", properties.getEcomRealm());
+        String url = String.format(properties.getEcom().getUrl().getGetUserByUsername(),
+                properties.getEcom().getEcomRealm());
         LoggerUtils.info(KeycloakUserClient.class, "Getting userId: GET {} username={}", url, username);
 
         return keycloakWebClient.get()
@@ -88,10 +87,10 @@ public class KeycloakUserClient {
                 .onErrorResume(WebClientResponseException.class, ex -> mapError(ex, "Get user failed"));
     }
 
-    // ======================== GET USER BY ID ========================
 
     public Mono<UserResponse> getUserById(String adminToken, String userId) {
-        String url = String.format("/admin/realms/%s/users/%s", properties.getEcomRealm(), userId);
+        String url = String.format(properties.getEcom().getUrl().getGetUserById(),
+                properties.getEcom().getEcomRealm(), userId);
         LoggerUtils.info(KeycloakUserClient.class, "Getting user detail: GET {} userId={}", url, userId);
 
         return keycloakWebClient.get()
@@ -103,10 +102,10 @@ public class KeycloakUserClient {
                 .onErrorResume(WebClientResponseException.class, ex -> mapError(ex, "Get user detail failed"));
     }
 
-    // ======================== GET REALM ROLE ========================
 
     public Mono<RoleResponse> getRealmRole(String adminToken, String roleName) {
-        String url = String.format("/admin/realms/%s/roles/%s", properties.getEcomRealm(), roleName);
+        String url = String.format(properties.getEcom().getUrl().getGetRealmRole(),
+                properties.getEcom().getEcomRealm(), roleName);
         LoggerUtils.info(KeycloakUserClient.class, "Getting realm role: GET {} role={}", url, roleName);
 
         return keycloakWebClient.get()
@@ -118,10 +117,10 @@ public class KeycloakUserClient {
                 .onErrorResume(WebClientResponseException.class, ex -> mapError(ex, "Get realm role failed"));
     }
 
-    // ======================== ASSIGN ROLE ========================
 
     public Mono<Void> assignRealmRole(String adminToken, String userId, String roleId, String roleName) {
-        String url = String.format("/admin/realms/%s/users/%s/role-mappings/realm", properties.getEcomRealm(), userId);
+        String url = String.format(properties.getEcom().getUrl().getAssignRealmRole(),
+                properties.getEcom().getEcomRealm(), userId);
         LoggerUtils.info(KeycloakUserClient.class, "Assigning role: POST {} userId={} role={}", url, userId, roleName);
 
         List<Map<String, String>> body = List.of(Map.of("id", roleId, "name", roleName));
@@ -138,18 +137,18 @@ public class KeycloakUserClient {
                 .onErrorResume(WebClientResponseException.class, ex -> mapError(ex, "Assign role failed"));
     }
 
-    // ======================== USER LOGIN (ecom realm) ========================
 
     public Mono<TokenResponse> userLogin(String username, String password) {
-        String url = String.format("/realms/%s/protocol/openid-connect/token", properties.getEcomRealm());
+        String url = String.format(properties.getEcom().getUrl().getUserLogin(),
+                properties.getEcom().getEcomRealm());
         LoggerUtils.info(KeycloakUserClient.class, "User login: POST {} username={}", url, username);
 
         return keycloakWebClient.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters.fromFormData("grant_type", "password")
-                        .with("client_id", properties.getEcomClientId())
-                        .with("client_secret", properties.getEcomClientSecret())
+                        .with("client_id", properties.getEcom().getEcomClientId())
+                        .with("client_secret", properties.getEcom().getEcomClientSecret())
                         .with("username", username)
                         .with("password", password))
                 .retrieve()
@@ -158,17 +157,17 @@ public class KeycloakUserClient {
                 .onErrorResume(WebClientResponseException.class, ex -> mapError(ex, "User login failed"));
     }
 
-    // ======================== VALIDATE TOKEN ========================
 
     public Mono<IntrospectResponse> validateToken(String token) {
-        String url = String.format("/realms/%s/protocol/openid-connect/token/introspect", properties.getEcomRealm());
+        String url = String.format(properties.getEcom().getUrl().getValidateToken(),
+                properties.getEcom().getEcomRealm());
         LoggerUtils.info(KeycloakUserClient.class, "Validating token: POST {}", url);
 
         return keycloakWebClient.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .body(BodyInserters.fromFormData("client_id", properties.getEcomClientId())
-                        .with("client_secret", properties.getEcomClientSecret())
+                .body(BodyInserters.fromFormData("client_id", properties.getEcom().getEcomClientId())
+                        .with("client_secret", properties.getEcom().getEcomClientSecret())
                         .with("token", token))
                 .retrieve()
                 .bodyToMono(IntrospectResponse.class)
@@ -176,16 +175,15 @@ public class KeycloakUserClient {
                 .onErrorResume(WebClientResponseException.class, ex -> mapError(ex, "Validate token failed"));
     }
 
-    // ======================== LOGOUT ========================
 
     public Mono<Void> logout(String refreshToken) {
-        String url = String.format("/realms/%s/protocol/openid-connect/logout", properties.getEcomRealm());
+        String url = String.format(properties.getEcom().getUrl().getLogout(), properties.getEcom().getEcomRealm());
         LoggerUtils.info(KeycloakUserClient.class, "User logout: POST {}", url);
 
         return keycloakWebClient.post()
                 .uri(url)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .body(BodyInserters.fromFormData("client_id", properties.getEcomClientId())
+                .body(BodyInserters.fromFormData("client_id", properties.getEcom().getEcomClientId())
                         .with("refresh_token", refreshToken))
                 .retrieve()
                 .toBodilessEntity()
@@ -194,10 +192,10 @@ public class KeycloakUserClient {
                 .onErrorResume(WebClientResponseException.class, ex -> mapError(ex, "Logout failed"));
     }
 
-    // ======================== UPDATE USER ========================
 
     public Mono<Void> updateUser(String adminToken, String userId, Map<String, Object> updateBody) {
-        String url = String.format("/admin/realms/%s/users/%s", properties.getEcomRealm(), userId);
+        String url = String.format(properties.getEcom().getUrl().getUpdateUser(),
+                properties.getEcom().getEcomRealm(), userId);
         LoggerUtils.info(KeycloakUserClient.class, "Updating user: PUT {} userId={}", url, userId);
 
         return keycloakWebClient.put()
@@ -212,10 +210,10 @@ public class KeycloakUserClient {
                 .onErrorResume(WebClientResponseException.class, ex -> mapError(ex, "Update user failed"));
     }
 
-    // ======================== RESET PASSWORD ========================
 
     public Mono<Void> resetPassword(String adminToken, String userId, String newPassword, boolean temporary) {
-        String url = String.format("/admin/realms/%s/users/%s/reset-password", properties.getEcomRealm(), userId);
+        String url = String.format(properties.getEcom().getUrl().getResetPassword(),
+                properties.getEcom().getEcomRealm(), userId);
         LoggerUtils.info(KeycloakUserClient.class, "Resetting password: PUT {} userId={}", url, userId);
 
         Map<String, Object> body = Map.of(

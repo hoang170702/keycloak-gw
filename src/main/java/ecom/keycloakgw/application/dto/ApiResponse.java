@@ -1,6 +1,7 @@
 package ecom.keycloakgw.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ecom.keycloakgw.domain.exception.ErrorCode;
 import ecom.keycloakgw.domain.utils.EApiStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +28,8 @@ public class ApiResponse<T> {
         return ApiResponse.<T>builder()
                 .requestId(requestId)
                 .status(EApiStatus.EXECUTE)
-                .code("000")
-                .message("Success")
+                .code(ErrorCode.SUCCESS.getCode())
+                .message(ErrorCode.SUCCESS.getMessage())
                 .data(data)
                 .timestamp(LocalDateTime.now())
                 .build();
