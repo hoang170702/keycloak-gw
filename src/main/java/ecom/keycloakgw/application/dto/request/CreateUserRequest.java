@@ -1,11 +1,10 @@
 package ecom.keycloakgw.application.dto.request;
 
+import ecom.keycloakgw.domain.utils.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @Builder
@@ -18,5 +17,5 @@ public class CreateUserRequest {
     private String firstName;
     private String lastName;
     private String password;
-    private String roleName;
+    private ERole roleName;
 }

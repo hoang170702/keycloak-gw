@@ -9,6 +9,7 @@ import ecom.keycloakgw.application.service.UserService;
 import ecom.keycloakgw.application.validator.Validator;
 import ecom.keycloakgw.domain.exception.BusinessException;
 import ecom.keycloakgw.domain.exception.ErrorCode;
+import ecom.keycloakgw.domain.utils.ERole;
 import ecom.keycloakgw.infrastructure.client.KeycloakUserClient;
 import ecom.log.annotation.UseAspect;
 import ecom.log.utils.LoggerUtils;
@@ -43,7 +44,10 @@ public class UserServiceImpl implements UserService {
 
             createUserValidator.validate(request);
 
-            String roleName = request.getRoleName() != null ? request.getRoleName() : "CUSTOMER";
+            String roleName = request.getRoleName() != null ?
+                    request.getRoleName().getRole() :
+                    ERole.CUSTOMER.getRole();
+
             String adminToken = extractToken(authorization);
             return keycloakUserClient.createUser(
                             adminToken,

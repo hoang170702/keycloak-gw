@@ -3,7 +3,9 @@ package ecom.keycloakgw.application.validator.impl;
 import ecom.keycloakgw.application.validator.Validator;
 import ecom.keycloakgw.domain.exception.BusinessException;
 import ecom.keycloakgw.domain.exception.ErrorCode;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserIdValidate implements Validator<String> {
     @Override
     public void validate(String userId) {
