@@ -184,6 +184,7 @@ public class KeycloakUserClient {
                 .uri(url)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(BodyInserters.fromFormData("client_id", properties.getEcom().getEcomClientId())
+                        .with("client_secret", properties.getEcom().getEcomClientSecret())
                         .with("refresh_token", refreshToken))
                 .retrieve()
                 .toBodilessEntity()
